@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shafra Café | System Access Portal</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #FAF7F2;
+            color: #49352B;
+            min-height: 100vh;
+        }
+
+    
+        .container {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+        }
+
+  
+        .left-section {
+            background: #49352B;
+            color: #FAF7F2;
+            padding: 55px 65px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+    
+        .left-section::before {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border: 1px solid rgba(233, 215, 197, 0.13);
+            border-radius: 50%;
+            right: -190px;
+            bottom: -100px;
+        }
+
+        .left-section::after {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(233, 215, 197, 0.13);
+            border-radius: 50%;
+            right: -130px;
+            bottom: -40px;
+        }
+
+
+        .logo {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #E9D7C5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            display: block;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 4px;
+            font-weight: normal;
+            color: #D7BBA8;
+            margin-top: 10px;
+        }
+
+        .logo {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo img {
+            width: 180px;
+            height: auto;
+            max-height: 100px;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .logo span {
+            display: block;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 4px;
+            font-weight: normal;
+            color: #D7BBA8;
+            margin-top: 10px;
+        }
+
+      
+        .intro {
+            position: relative;
+            z-index: 1;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .intro-label {
+            color: #D9A68D;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .intro h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(38px, 4vw, 55px);
+            line-height: 1.2;
+            font-weight: normal;
+            margin-bottom: 25px;
+        }
+
+        .intro h1 span {
+            color: #D98A68;
+            font-style: italic;
+        }
+
+        .intro p {
+            color: #E9D7C5;
+            font-size: 15px;
+            line-height: 1.9;
+            max-width: 390px;
+        }
+
+        .intro-line {
+            width: 65px;
+            height: 3px;
+            background: #C66B45;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+
+
+        .left-footer {
+            color: #C9B3A4;
+            font-size: 12px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+
+
+        .right-section {
+            background: #FAF7F2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 55px 50px;
+        }
+
+        .access-content {
+            width: 100%;
+            max-width: 570px;
+        }
+
+
+        .access-heading {
+            margin-bottom: 35px;
+        }
+
+        .small-title {
+            color: #C66B45;
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .access-heading h2 {
+            font-family: Georgia, serif;
+            font-size: 35px;
+            color: #49352B;
+            margin-bottom: 12px;
+        }
+
+        .access-heading p {
+            color: #8B776A;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E9D7C5;
+            border-radius: 15px;
+            padding: 28px 30px;
+            display: flex;
+            align-items: center;
+            gap: 23px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(7px);
+            border-color: #C66B45;
+            box-shadow: 0 10px 25px rgba(73, 53, 43, 0.10);
+        }
+
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            min-width: 70px;
+            background: #F5E8DC;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            transition: 0.3s ease;
+        }
+
+        .card:hover .icon {
+            background: #E9D7C5;
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            flex: 1;
+        }
+
+        .card-info h3 {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            color: #49352B;
+            margin-bottom: 8px;
+        }
+
+        .card-info p {
+            font-size: 13px;
+            color: #8B776A;
+            line-height: 1.7;
+        }
+
+
+        .btn {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 11px 20px;
+            background: #C66B45;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #49352B;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(73, 53, 43, 0.15);
+        }
+
+
+        .right-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #E9D7C5;
+            color: #9B887B;
+            font-size: 11px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .right-footer span {
+            color: #C66B45;
+            font-weight: bold;
+        }
+
+
+        @media (max-width: 900px) {
+
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .left-section {
+                padding: 40px 30px;
+            }
+
+            .right-section {
+                padding: 40px 25px;
+            }
+
+            .intro h1 {
+                font-size: 38px;
+            }
+
+            .card {
+                padding: 23px 20px;
+                gap: 15px;
+            }
+
+            .icon {
+                width: 60px;
+                height: 60px;
+                min-width: 60px;
+                font-size: 27px;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-section {
+                min-height: 390px;
+                padding: 35px 28px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .intro {
+                margin-top: 55px;
+                margin-bottom: 45px;
+            }
+
+            .intro h1 {
+                font-size: 39px;
+            }
+
+            .right-section {
+                padding: 45px 22px;
+            }
+
+            .access-heading h2 {
+                font-size: 29px;
+            }
+
+            .card {
+                align-items: flex-start;
+                padding: 23px 18px;
+                gap: 15px;
+            }
+
+            .icon {
+                width: 55px;
+                height: 55px;
+                min-width: 55px;
+                font-size: 25px;
+            }
+
+            .card-info h3 {
+                font-size: 19px;
+            }
+
+            .card-info p {
+                font-size: 12px;
+            }
+
+            .btn {
+                font-size: 11px;
+                padding: 10px 15px;
+            }
+
+            .right-footer {
+                margin-top: 30px;
+            }
+        }
+
+ 
+        @media (max-width: 380px) {
+
+            .card {
+                flex-direction: column;
+            }
+
+            .intro h1 {
+                font-size: 33px;
+            }
+
+            .left-section {
+                padding: 30px 22px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <section class="left-section">
+
+    
+            <header class="logo">
+                SHAFRA CAFÉ
+                <img src="./shafralogo.png" alt="Shafra Café Logo">
+                <span>COFFEE • FOOD • COMFORT</span>
+            </header>
+
+  
+            <div class="intro">
+
+                <div class="intro-label">
+                    Welcome to our café
+                </div>
+
+                <h1>
+                    A Little Taste<br>
+                    of <span>Happiness.</span>
+                </h1>
+
+                <p>
+                    Enjoy good coffee, delicious food, and
+                    memorable moments with Shafra Café.
+                    We're happy to serve you!
+                </p>
+
+                <div class="intro-line"></div>
+
+            </div>
+
+      
+            <footer class="left-footer">
+                Your everyday café experience starts here.
+            </footer>
+
+        </section>
+
+
+  
+        <section class="right-section">
+
+            <div class="access-content">
+
+    
+                <div class="access-heading">
+
+                    <div class="small-title">
+                        SYSTEM ACCESS PORTAL
+                    </div>
+
+                    <h2>Choose Your Portal</h2>
+
+                    <p>
+                        Please select the appropriate portal
+                        to continue to Shafra Café.
+                    </p>
+
+                </div>
+
+
+        
+                <div class="cards">
+
+                    <div class="card">
+
+                        <div class="icon">
+                            ☕
+                        </div>
+
+                        <div class="card-info">
+
+                            <h3>Customer Side</h3>
+
+                            <p>
+                                Browse our café menu, explore
+                                your favorite products, and
+                                place your orders.
+                            </p>
+
+                            <a href="./CUSTOMER/" class="btn">
+                                Enter Customer Portal →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card">
+
+                        <div class="icon">
+                            🤵🏻
+                        </div>
+
+                        <div class="card-info">
+
+                            <h3>Employee Side</h3>
+
+                            <p>
+                                Access employee features,
+                                manage customer orders, and
+                                assist with café operations.
+                            </p>
+
+                            <a href="./EMPLOYEE/" class="btn">
+                                Enter Employee Portal →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+   
+                <footer class="right-footer">
+
+                    <p>
+                        © 2026 <span>Shafra Café</span>.
+                        All Rights Reserved.
+                    </p>
+
+                    <p>
+                        Made with care and a love for coffee.
+                    </p>
+
+                </footer>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
