@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Shafra Cafe | Hidden Menu Items</title>        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Outfit:wght@900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body data-page="hidden-menu-items">
+        <div class="app">
+            <aside class="side">
+                <div class="logo">
+                    <img src="images/shafralogo.png"/>
+                    <p>
+                        MANAGEMENT
+                        <br />
+                        PANEL
+                    </p>
+                </div>
+                <small>Operations</small>
+                <a href="orders.html">Orders</a>
+                <a href="qr-generator.html">QR Generator</a>
+                <small>Catalog</small>
+                <a href="menu-items.html">Menu Items</a>
+                <a href="hidden-menu-items.html" class="active">Hidden Menu Items</a>
+                <small>Reports</small>
+                <a href="sales-report.html">Sales Report</a>
+                <a href="best-sellers.html">Best Sellers</a>
+            </aside>
+            <main>
+                <h1>Hidden Menu</h1>
+                <p class="sub">Exclusive items customers unlock with beans. Everything here shows on the customer Secret Menu.</p>
+                <div class="toolbar">
+                    <div class="pills" id="pills"></div>
+                    <input id="search" type="search" placeholder="Search items…" aria-label="Search items" />
+                </div>
+                <p class="total" id="total"></p>
+                <div class="panel-g">
+                    <div id="groups"></div>
+                    <p class="empty" id="empty" hidden>No items match.</p>
+                    <div class="addbox">
+                        <h3>Add New Item</h3>
+                        <div class="frm">
+                            <label>
+                                Name
+                                <input id="name" placeholder="e.g. Iced Latte" maxlength="60" />
+                            </label>
+                            <label>
+                                Category
+                                <select id="category"></select>
+                            </label>
+                            <label>
+                                Bean cost
+                                <input id="price" type="number" min="1" step="any" placeholder="e.g. 5" />
+                            </label>
+                        </div>
+                        <div class="frm">
+                            <label class="wide">
+                                Description
+                                <input id="desc" placeholder="One short line customers will read" maxlength="140" />
+                            </label>
+                            <label>
+                                Picture
+                                <input id="image" type="file" accept="image/*" />
+                            </label>
+                            <img id="preview" class="preview" alt="Picture preview" hidden />
+                        </div>
+                        <div class="addrow">
+                            <span id="formMsg" class="form-msg" role="status"></span>
+                            <button class="btn" id="add" type="button">Add Item</button>
+                        </div>
+                    </div>
+                </div>
+                <dialog id="editDialog" class="edit-dialog">
+                    <h3>Edit item</h3>
+                    <div class="frm">
+                        <label class="wide">Name <input id="eName" maxlength="60" /></label>
+                        <label>Category <select id="eCategory"></select></label>
+                        <label>Bean cost <input id="ePrice" type="number" min="1" step="any" /></label>
+                        <label class="wide">Description <input id="eDesc" maxlength="140" /></label>
+                        <label>Replace picture <input id="eImage" type="file" accept="image/*" /></label>
+                        <img id="ePreview" class="preview" alt="Current picture" hidden />
+                    </div>
+                    <p id="eMsg" class="form-msg bad"></p>
+                    <div class="addrow">
+                        <button class="btn ghost" id="eCancel" type="button">Cancel</button>
+                        <button class="btn" id="eSave" type="button">Save changes</button>
+                    </div>
+                </dialog>
+            </main>
+        </div>
+        <script src="../shared/catalog.js"></script>
+        <script src="catalog-admin.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
