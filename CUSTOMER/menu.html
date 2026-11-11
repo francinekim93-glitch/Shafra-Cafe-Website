@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | Shafra Cafe</title>
+  <meta name="description" content="Coffee, tea, pastries and meals made fresh daily at Shafra Cafe.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Outfit:wght@900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="../shared/catalog.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/menu-data.js" defer></script>
+  <script src="js/menu-render.js" defer></script>
+  <script src="js/script.js" defer></script>
+  <script src="js/item-modal.js" defer></script>
+  <script src="js/secret-menu.js" defer></script>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="logo" aria-label="Shafra Cafe home"><img src="images/Shafra-Logo.png" alt="Shafra Cafe logo"></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="offers.html">Offers</a></li>
+      <li><a href="beans.html">Beans <span id="beansCount" class="cart-count" hidden>0</span></a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="cart.html" class="cart-link" aria-label="Cart"><img src="images/icons/cart.svg" alt=""><span id="cartCount" class="cart-count" hidden>0</span></a>
+      <a href="account.html" id="accountLink" class="nav-login">Log in</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="page-title">
+      <h1>Our Menu</h1>
+      <p>Made fresh, one cup at a time. Tap any item to see details and add it to your cart.</p>
+    </section>
+
+    <section style="padding-top:40px;">
+      <div class="container">
+
+        <!-- SEARCH + CATEGORY BUTTONS -->
+        <input type="search" id="menuSearch" class="search" placeholder="Search the menu..."
+          aria-label="Search the menu">
+
+        <div class="category-tabs">
+          <button class="active" data-filter="all">All</button>
+          <button class="offers-tab" data-filter="offers">&#9733; Offers</button>
+          <button data-filter="coffee">Coffee</button>
+          <button data-filter="tea">Tea</button>
+          <button data-filter="pastries">Pastries</button>
+          <button data-filter="meals">Meals</button>
+          <a href="#secret" class="secret-tab" id="secretTab" hidden>&#9733; Secret menu</a>
+        </div>
+
+        <!-- OFFERS and the categories below are drawn by js/menu-render.js from the shared menu list (shared/catalog.js) -->
+        <div class="menu-category menu-offers" id="offers"></div>
+        <!-- SECRET MENU: filled in by js/secret-menu.js, only after 5 successful orders in a row -->
+        <div class="secret-menu" id="secret" hidden>
+          <span class="badge">Secret menu unlocked</span>
+          <h2 id="secretTitle">Congratulations!</h2>
+          <p id="secretMessage"></p>
+          <p class="secret-balance"><span class="bean-icon" aria-hidden="true"></span>Your beans: <strong
+              id="secretBalance">0</strong> &middot; <a href="beans.html">How beans work</a></p>
+          <div class="menu-list" id="secretGrid"></div>
+        </div>
+        <div id="menuCategories"></div>
+        <p id="noResults" class="no-results" hidden>No items match your search. Try another word.</p>
+
+        <p style="margin-top:40px; font-size:.85rem; opacity:.7;">Please tell us about any allergies before ordering.
+          Prices include VAT.</p>
+
+      </div>
+    </section>
+
+    <!-- ITEM DETAILS POP-UP: filled in by js/item-modal.js -->
+    <dialog class="item-dialog" id="itemDialog" aria-labelledby="dlgName">
+      <button type="button" class="dialog-close" id="dlgClose" aria-label="Close">&times;</button>
+      <div class="dialog-img"><img id="dlgImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></div>
+      <div class="dialog-body">
+        <p class="until" id="dlgBadge" hidden></p>
+        <h2 id="dlgName"></h2>
+        <p><span class="old-price" id="dlgOld" hidden></span><span class="price" id="dlgPrice"></span></p>
+        <p class="beans-line"><span class="bean-icon" aria-hidden="true"></span><span id="dlgBeans"></span></p>
+        <p id="dlgLong"></p>
+
+        <h3>Ingredients</h3>
+        <p id="dlgIngredients"></p>
+        <p class="allergens" id="dlgAllergens"></p>
+
+        <div id="dlgSizesWrap">
+          <h3>Choose a size</h3>
+          <div class="chips" id="dlgSizes"></div>
+        </div>
+
+        <div id="dlgAddonsWrap">
+          <h3>Add-ons</h3>
+          <div class="addon-list" id="dlgAddons"></div>
+        </div>
+
+        <div id="dlgNoteWrap">
+          <h3>Special requests</h3>
+          <textarea class="note" id="dlgNote" maxlength="140" aria-label="Special requests"></textarea>
+        </div>
+
+        <div class="dialog-footer">
+          <div class="qty" id="dlgQtyBox">
+            <button type="button" id="dlgMinus" aria-label="Decrease quantity">&minus;</button>
+            <span id="dlgQty">1</span>
+            <button type="button" id="dlgPlus" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="button" class="btn" id="dlgAdd">Add to cart</button>
+        </div>
+      </div>
+    </dialog>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>Open at:</h3>
+        <p>
+          Weekdays &ndash; 8:00 AM<br>
+          Weekends &ndash; 10:00 AM
+        </p>
+      </div>
+
+      <div>
+        <h3>About Us</h3>
+        <a href="AboutUs.html">Our Story</a>
+      </div>
+
+      <div>
+        <h3>Visit Us</h3>
+        <p>
+          San Isidro, Tarlac City<br>
+          Capas, Tarlac City<br>
+          Paniqui, Tarlac City
+        </p>
+      </div>
+
+      <div>
+        <h3>Contact Us</h3>
+        <a href="09xx xxx xxxx">09xx xxx xxxx</a>
+        <a href="shafra@gmail.com">shafracafe@gmail.com</a>
+
+      </div>
+
+      <div>
+        <h3>Follow Us</h3>
+        <a href="">Intagram</a>
+        <a href="">Facebook</a>
+        <a href="">Tiktok</a>
+      </div>
+
+      <p>
+      <p class="copyright">&copy; 2026 Shafra Cafe. All rights reserved.</p>
+      </p>
+  </footer>
+
+</body>
+</html>
